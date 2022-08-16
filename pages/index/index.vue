@@ -1,9 +1,7 @@
 <template>
 	<view class="container">
-		<view class="flex align-center justify-center ">
-			<div class='bg-danger w-100'>
-				123
-			</div>
+		<view class="bg-main animate__animated animate__bounce">
+			123
 		</view>
 	</view>
 </template>
