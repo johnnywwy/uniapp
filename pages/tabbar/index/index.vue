@@ -3,7 +3,7 @@
 		<view class="bg-main animate__animated animate__bounce">
 			123
 		</view>
-		<text class="iconfont icon-shouye-" style="font-size: 100px;"></text>
+		<text class="iconfont icon-shouye-"></text>
 	</view>
 </template>
 
