@@ -1,9 +1,5 @@
 <template>
 	<view class="container">
-		<view class="bg-main animate__animated animate__bounce">
-			123
-		</view>
-		<text class="iconfont icon-shouye-"></text>
 	</view>
 </template>
 
@@ -11,7 +7,7 @@
 	export default {
 		data() {
 			return {
-				href: 'https://uniapp.dcloud.io/component/README?id=uniui'
+
 			}
 		},
 		methods: {
@@ -21,9 +17,5 @@
 </script>
 
 <style>
-	.container {
-		padding: 20px;
-		font-size: 14px;
-		line-height: 24px;
-	}
+
 </style>
