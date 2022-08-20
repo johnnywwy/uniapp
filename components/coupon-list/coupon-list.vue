@@ -6,7 +6,7 @@
 					<text>￥100</text>
 					<text class="font-sm">满￥200可用</text>
 				</view>
-				<view hover-class="bg-hover-warning" class="">领取</view>
+				<view hover-class="bg-hover-warning">领取</view>
 			</view>
 		</scroll-view>
 	</view>
