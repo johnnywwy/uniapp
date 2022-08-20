@@ -3,12 +3,21 @@
 		<f-search-bar></f-search-bar>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
 			<swiper-item class="flex justify-center" v-for="(item,index) in swiper" :key="index">
-				<image :src="item.src" mode="aspectFill" style="width: 720rpx; height: 300rpx;" class="rounded shadow">
+				<image :src="item.src" mode="aspectFill" style="width: 720rpx; height: 300rpx;" class="rounded">
 				</image>
 			</swiper-item>
 		</swiper>
 		<icon-nav :list="iconNav"></icon-nav>
 		<coupon-list></coupon-list>
+		<view class="divider"></view>
+
+		<view class="flex align-center py-3 px-2">
+			<text class="font-md font-weight-bold">拼团</text>
+		</view>
+		<scroll-view scroll-x="true" class="scroll-row">
+			<course-list v-for="(item,index) in groupList" :key="index" :item=item></course-list>
+		</scroll-view>
+
 	</view>
 </template>
 
@@ -55,7 +64,19 @@
 						name: '社区',
 						src: '/static/demo/icon/ask.png'
 					}
-				]
+				],
+				groupList: [{
+					"group_id": 19,
+					"id": 12,
+					"title": "unicloud商城全栈开发",
+					"cover": "http://demo-mp3.oss-cn-shenzhen.aliyuncs.com/egg-edu-demo/79023e0596c23aff09e6.png",
+					"price": "4.00",
+					"t_price": "10.00",
+					"type": "media",
+					"start_time": "2021-04-15T16:00:00.000Z",
+					"end_time": "2022-05-16T16:00:00.000Z"
+
+				}]
 			}
 		},
 		methods: {
