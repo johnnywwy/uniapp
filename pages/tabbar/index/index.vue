@@ -82,7 +82,7 @@
 						"end_time": "2022-05-16T16:00:00.000Z"
 					},
 				],
-				templates: [], //后端获取首页数据
+				templates: [], //暂存后端获取的数据
 			}
 		},
 		onPullDownRefresh() {
@@ -93,30 +93,12 @@
 		},
 		methods: {
 			getData() {
-				uni.request({
-					url: 'http://demonuxtapi.dishait.cn/mobile/index',
-					method: 'GET',
-					header: {
-						appid: " bd9d01ecc75dbbaaefce"
-					},
-					success: res => {
-						// console.log(res);
-						if (res.statusCode !== 200 || res.data.msg === 'fail') {
-							uni.showToast({
-								title: res.data.data || '请求失败',
-								icon: 'none'
-							});
-							return
-						}
-						this.templates = res.data.data
-					},
-					fail: (err) => {
-						console.log(err);
-					},
-					complete: () => {
-						uni.stopPullDownRefresh()
-					}
-				});
+				this.$api.getIndexData().then(data => {
+					// console.log(data);
+					this.templates = data
+				}).finally(() => {
+					uni.stopPullDownRefresh()
+				})
 			}
 		}
 	}
