@@ -1,32 +1,57 @@
 <template>
 	<view>
-		<f-search-bar></f-search-bar>
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item class="flex justify-center" v-for="(item,index) in swiper" :key="index">
-				<image :src="item.src" mode="aspectFill" style="width: 720rpx; height: 300rpx;" class="rounded">
+		<block v-for="(item,index) in templates" :key="index">
+			<!-- 搜索组件 -->
+			<f-search-bar v-if="item.type==='search'" :placeholder='item.placeholder'></f-search-bar>
+
+			<!-- 轮播图组件 -->
+			<swiper v-else-if="item.type==='swiper'" :indicator-dots="true" :autoplay="true" :interval="3000"
+				:duration="1000">
+				<swiper-item class="flex justify-center" v-for="(sitem,sIndex) in item.data" :key="sIndex">
+					<image :src="sitem.src" mode="aspectFill" style="width: 720rpx; height: 300rpx;" class="rounded">
+					</image>
+				</swiper-item>
+			</swiper>
+
+			<!-- 图标组件 -->
+			<icon-nav v-else-if="item.type==='icons'" :list="item.data"></icon-nav>
+
+			<!-- 优惠券组件 -->
+			<coupon-list v-else-if="item.type==='coupon'"></coupon-list>
+
+			<!-- 拼团 -->
+			<template v-else-if="item.type==='promotion'">
+				<view class="divider"></view>
+				<view class="flex align-center py-3 px-2">
+					<text class="font-md font-weight-bold">
+						{{item.listType==='group'? '拼团':'秒杀'}}
+					</text>
+				</view>
+				<scroll-view scroll-y="true" class="scroll-row">
+					<course-list v-for="(item,index) in groupList" :key="index" :item="item"></course-list>
+				</scroll-view>
+			</template>
+
+			<!-- 最新课程 -->
+			<template v-else-if="item.type==='list'">
+				<view class="divider"></view>
+				<view class="flex align-center py-3 px-2 justify-between">
+					<text class="font-md font-weight-bold">{{item.title}}</text>
+					<text class="font-sm text-light-muted" v-if="item.showMore">查看全部</text>
+				</view>
+				<view>
+					<course-list v-for="(item,index) in item.data" :key="index" :item="item" :type="item.listType">
+					</course-list>
+				</view>
+			</template>
+
+			<!-- 底部广告 -->
+			<template v-else-if="item.type==='imageAd'">
+				<view class="divider"></view>
+				<image :src="item.data" mode="aspectFill" style="width: 750rpx; height: 360rpx;">
 				</image>
-			</swiper-item>
-		</swiper>
-		<icon-nav :list="iconNav"></icon-nav>
-		<coupon-list></coupon-list>
-		<view class="divider"></view>
-
-		<view class="flex align-center py-3 px-2">
-			<text class="font-md font-weight-bold">拼团</text>
-		</view>
-		<scroll-view scroll-y="true" class="scroll-row">
-			<course-list v-for="(item,index) in groupList" :key="index" :item="item"></course-list>
-		</scroll-view>
-
-		<view class="divider"></view>
-		<view class="flex align-center py-3 px-2 justify-between">
-			<text class="font-md font-weight-bold">最新课程</text>
-			<text class="font-sm text-light-muted">查看全部</text>
-		</view>
-		<view>
-			<course-list v-for="(item,index) in list" :key="index" :item="item" type="one"></course-list>
-		</view>
-
+			</template>
+		</block>
 	</view>
 </template>
 
@@ -34,46 +59,6 @@
 	export default {
 		data() {
 			return {
-				swiper: [{
-						src: '/static/demo/banner/banner1.png',
-					},
-					{
-						src: '/static/demo/banner/banner2.png',
-					}
-				],
-				iconNav: [{
-						name: '活动',
-						src: '/static/demo/icon/hd.png'
-					},
-					{
-						name: '考试',
-						src: '/static/demo/icon/test.png'
-					},
-					{
-						name: '秒杀',
-						src: '/static/demo/icon/ms.png'
-					},
-					{
-						name: '拼团',
-						src: '/static/demo/icon/pt.png'
-					},
-					{
-						name: '直播',
-						src: '/static/demo/icon/course.png'
-					},
-					{
-						name: '专栏',
-						src: '/static/demo/icon/column.png'
-					},
-					{
-						name: '电子书',
-						src: '/static/demo/icon/book.png'
-					},
-					{
-						name: '社区',
-						src: '/static/demo/icon/ask.png'
-					}
-				],
 				groupList: [{
 						"group_id": 19,
 						"id": 12,
@@ -97,54 +82,42 @@
 						"end_time": "2022-05-16T16:00:00.000Z"
 					},
 				],
-				list: [{
-						"group_id": 19,
-						"id": 12,
-						"title": "unicloud商城全栈开发",
-						"cover": "http://demo-mp3.oss-cn-shenzhen.aliyuncs.com/egg-edu-demo/79023e0596c23aff09e6.png",
-						"price": "4.00",
-						"t_price": "10.00",
-						"type": "media",
-						"start_time": "2021-04-15T16:00:00.000Z",
-						"end_time": "2022-05-16T16:00:00.000Z"
-					},
-					{
-						"group_id": 19,
-						"id": 12,
-						"title": "unicloud商城全栈开发",
-						"cover": "http://demo-mp3.oss-cn-shenzhen.aliyuncs.com/egg-edu-demo/79023e0596c23aff09e6.png",
-						"price": "4.00",
-						"t_price": "10.00",
-						"type": "media",
-						"start_time": "2021-04-15T16:00:00.000Z",
-						"end_time": "2022-05-16T16:00:00.000Z"
-					}, {
-						"group_id": 19,
-						"id": 12,
-						"title": "unicloud商城全栈开发",
-						"cover": "http://demo-mp3.oss-cn-shenzhen.aliyuncs.com/egg-edu-demo/79023e0596c23aff09e6.png",
-						"price": "4.00",
-						"t_price": "10.00",
-						"type": "media",
-						"start_time": "2021-04-15T16:00:00.000Z",
-						"end_time": "2022-05-16T16:00:00.000Z"
-					}, {
-						"group_id": 19,
-						"id": 12,
-						"title": "unicloud商城全栈开发",
-						"cover": "http://demo-mp3.oss-cn-shenzhen.aliyuncs.com/egg-edu-demo/79023e0596c23aff09e6.png",
-						"price": "4.00",
-						"t_price": "10.00",
-						"type": "media",
-						"start_time": "2021-04-15T16:00:00.000Z",
-						"end_time": "2022-05-16T16:00:00.000Z"
-					}
-
-				]
+				templates: [], //后端获取首页数据
 			}
 		},
+		onPullDownRefresh() {
+			this.getData()
+		},
+		created() {
+			this.getData()
+		},
 		methods: {
-
+			getData() {
+				uni.request({
+					url: 'http://demonuxtapi.dishait.cn/mobile/index',
+					method: 'GET',
+					header: {
+						appid: " bd9d01ecc75dbbaaefce"
+					},
+					success: res => {
+						// console.log(res);
+						if (res.statusCode !== 200 || res.data.msg === 'fail') {
+							uni.showToast({
+								title: res.data.data || '请求失败',
+								icon: 'none'
+							});
+							return
+						}
+						this.templates = res.data.data
+					},
+					fail: (err) => {
+						console.log(err);
+					},
+					complete: () => {
+						uni.stopPullDownRefresh()
+					}
+				});
+			}
 		}
 	}
 </script>
