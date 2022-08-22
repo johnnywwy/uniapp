@@ -25,6 +25,16 @@
 				"titleNView": false //禁用原生导航栏
 			}
 		}
+	}, {
+		"path": "pages/login/login",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false,
+			"app-plus": {
+				"titleNView": false //禁用原生导航栏
+			}
+		}
+
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -27,11 +27,12 @@
 			};
 		},
 		created() {
-			this.$api.getGroup({
+			let key = this.type === 'group' ? 'getGroup' : 'getFlashsale'
+			this.$api[key]({
 				page: 1,
 				usable: 1
 			}).then(res => {
-				console.log(res.rows);
+				// console.log(res.rows);
 				this.list = res.rows
 			})
 		},
