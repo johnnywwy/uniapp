@@ -21,15 +21,7 @@
 
 			<!-- 拼团 -->
 			<template v-else-if="item.type==='promotion'">
-				<view class="divider"></view>
-				<view class="flex align-center py-3 px-2">
-					<text class="font-md font-weight-bold">
-						{{item.listType==='group'? '拼团':'秒杀'}}
-					</text>
-				</view>
-				<scroll-view scroll-y="true" class="scroll-row">
-					<course-list v-for="(item,index) in groupList" :key="index" :item="item"></course-list>
-				</scroll-view>
+				<active-list :type="item.listType"></active-list>
 			</template>
 
 			<!-- 最新课程 -->

@@ -6,7 +6,7 @@
 		</view>
 		<view class="flex flex-column flex-shrink">
 			<text class="text-ellipsis font-md">{{item.title}}</text>
-			<view class="font-sm text-light-muted my-1">10人已枪</view>
+			<view class="font-sm text-light-muted my-1" v-html="item.try" v-if="item.try"></view>
 			<view class="flex flex-1 align-end">
 				<text class="font-md text-danger">￥{{ item.price }}</text>
 				<text class="font-sm text-light-muted">￥{{ item.t_price }}</text>
