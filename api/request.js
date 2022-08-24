@@ -53,9 +53,5 @@ export default {
 		options.method = 'POST'
 		options.data = data
 		return this.request(options)
-
 	}
-
-
-
 }

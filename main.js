@@ -7,6 +7,23 @@ Vue.prototype.$api = api
 import store from '@/store/index.js';
 Vue.prototype.$store = store
 
+Vue.prototype.navigateTo = function(url) {
+	uni.navigateTo({
+		url
+	})
+}
+
+Vue.prototype.authJump = function(url) {
+	if (!store.state.token) {
+		return uni.navigateTo({
+			url: '/pages/login/login'
+		})
+	}
+	uni.navigateTo({
+		url
+	})
+}
+
 Vue.prototype.$toast = function(msg) {
 	uni.showToast({
 		title: msg,

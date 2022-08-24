@@ -1,6 +1,3 @@
-import {
-	getgroups
-} from 'process';
 import api from './request.js';
 
 export default {
@@ -27,6 +24,10 @@ export default {
 	// 账号登录
 	login(data) {
 		return api.post('/mobile/login', data)
-	}
+	},
 
+	//退出登录
+	logout() {
+		return api.post('/mobile/logout')
+	},
 }

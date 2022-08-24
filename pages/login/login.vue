@@ -42,9 +42,10 @@
 			</view>
 
 			<!-- 用户协议 -->
-			<checkbox-group class='flex align-center justify-center mt-3'>
+			<checkbox-group v-if=" type ==='login'" @change="hanCheckboxChange"
+				class='flex align-center justify-center mt-3'>
 				<label class="text-light-muted">
-					<checkbox color="#7fd49e" style="transform: scale(0.7);" />
+					<checkbox value="1" color="#7fd49e" style="transform: scale(0.7);" />
 					<text class="font">已阅读并同意用户协议&隐私声明</text>
 				</label>
 			</checkbox-group>
@@ -56,6 +57,7 @@
 	export default {
 		data() {
 			return {
+				confirm: false,
 				type: 'login',
 				form: {
 					username: 'johnny',
@@ -81,16 +83,21 @@
 					repassword: ''
 				}
 			},
+			hanCheckboxChange(e) {
+				this.confirm = !!e.detail.value.length
+			},
 
 			submit() {
+				if (!this.confirm && this.type === 'login') {
+					return this.$toast('请先阅读并同意用户协议&隐私声明')
+				}
 				uni.showLoading({
 					title: '提交中',
 					mask: false
 				})
 				let data = Object.assign(this.form, {})
 				if (this.type === 'reg') {
-
-					console.log(data);
+					// console.log(data);
 					this.$api.reg(data).then(res => {
 						this.$toast('注册成功')
 						this.resetForm()
@@ -103,16 +110,13 @@
 						// console.log(user)
 						this.$toast('登录成功')
 						this.$store.dispatch('login', user)
-
 						setTimeout(() => {
 							this.back()
 						}, 350)
 					}).finally(() => {
 						uni.hideLoading()
 					})
-
 				}
-
 			}
 		}
 	}

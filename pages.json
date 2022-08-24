@@ -21,8 +21,16 @@
 		"style": {
 			"navigationBarTitleText": "",
 			"enablePullDownRefresh": false,
+			"navigationBarBackgroundColor": "#5ccc84", //背景颜色
+			"navigationBarTextStyle": "white", //字体颜色
 			"app-plus": {
-				"titleNView": false //禁用原生导航栏
+				"titleNView": {
+					"titleText": "我的",
+					"titleAlign": "left",
+					"buttons": [{
+						"type": "menu"
+					}]
+				} //禁用原生导航栏
 			}
 		}
 	}, {
@@ -35,14 +43,35 @@
 			}
 		}
 
+	}, {
+		"path": "pages/setting/setting",
+		"style": {
+			"navigationBarTitleText": "我的设置",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/my-coupon/my-coupon",
+		"style": {
+			"navigationBarTitleText": "我的优惠券",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/user-safe/user-safe",
+		"style": {
+			"navigationBarTitleText": "修改密码",
+			"enablePullDownRefresh": false
+		}
+
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uniapp在线教育",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
-			"background": "#efeff4"
+			"background": "#ffffff"
 		}
 	},
 	"tabBar": {
