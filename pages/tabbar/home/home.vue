@@ -19,7 +19,7 @@
 					<view class="pt-1 mb-2 font-md">{{user.username|| user.nickname}}</view>
 					<view class="font-sm">{{user.desc || '暂无描述'}}</view>
 				</view>
-				<text class="iconfont icon-leimupinleifenleileibie text-white"></text>
+				<text class="iconfont icon-leimupinleifenleileibie text-white" @click="editUserInfo"></text>
 			</view>
 
 			<icons-card :icons="icons"></icons-card>
@@ -85,6 +85,10 @@
 			openSetting() {
 				this.navigateTo('/pages/setting/setting')
 			},
+			// 编辑用户信息
+			editUserInfo() {
+				this.authJump('/pages/user-info/user-info')
+			}
 		}
 	}
 </script>
