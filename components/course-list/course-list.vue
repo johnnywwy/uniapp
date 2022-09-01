@@ -91,6 +91,7 @@
 				bottom: 10rpx;
 				right: 10rpx;
 				background: rgba(0, 0, 0, 0.4);
+
 				paddnig: 0 10rpx;
 
 			}
